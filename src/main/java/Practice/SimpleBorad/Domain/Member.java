@@ -25,5 +25,5 @@ public class Member {
     private String username;
 
     @Column(nullable = false)
-    private String passward;
+    private String password;
 }
