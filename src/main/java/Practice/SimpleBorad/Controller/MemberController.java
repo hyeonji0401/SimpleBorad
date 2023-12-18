@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.Map;
 
 @Controller //컨트롤러이며 Bean에 등혹하기 위해서 씀
-@RequiredArgsConstructor //의존관계 관련 어노테이션
+@RequiredArgsConstructor //생성자를 통한 memberService 의존 주입 대체
 @Slf4j //로그 어노테이션
 public class MemberController {
 
@@ -35,7 +35,7 @@ public class MemberController {
     }
 
     //유효성 검증
-    @InitBinder
+    @InitBinder //validator 사용시 검증이 필요한 객체를 가져오기 전에 수행한 메소드 지정
     public void validatorBinder(WebDataBinder binder){
         binder.addValidators(checkEmailValidator);
     }
@@ -53,6 +53,7 @@ public class MemberController {
                 model.addAttribute(key, validatorResult.get(key));
             }
 
+            System.out.println("중복된 이메일이 있습니다");
             //회원가입 페이지로 리턴
             return "/members/createMemberForm";
         }

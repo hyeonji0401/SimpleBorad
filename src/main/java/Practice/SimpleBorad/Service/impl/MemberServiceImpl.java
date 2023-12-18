@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@RequiredArgsConstructor //MemberRepository 생성자를 쓰기 않기 위해서
+@RequiredArgsConstructor //생성자를 통한 memberRepository 의존성 주입 대신
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
@@ -35,6 +35,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Map<String, String> ValidateHandling(Errors errors){
         Map<String, String> validatorResult = new HashMap<>();
+
+        //유효성 및 중복 검사에 실패한 필드 목록을 받음
         for(FieldError error : errors.getFieldErrors()){
             String validKeyName = String.format("valid_%s", error.getField());
             validatorResult.put(validKeyName, error.getDefaultMessage());

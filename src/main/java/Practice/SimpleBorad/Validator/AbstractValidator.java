@@ -13,7 +13,7 @@ public abstract class AbstractValidator<T> implements Validator {
         return true;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") //검증되지 ㅇ낳은 연산자 관련 경고 띄우지 않도록 함
     @Override
     public void validate(Object target, Errors errors){
         try{
